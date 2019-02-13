@@ -1,5 +1,6 @@
 package jaeyoung.com.dagger.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
@@ -12,6 +13,7 @@ import java.util.List;
 @Generated("org.jsonschema2pojo")
 public class WeatherResponse {
 	@SerializedName("list")
+	@Expose
 	private List<WeatherInfo> weatherInfo = new ArrayList<>();
 
 	public List<WeatherInfo> getWeatherInfo() {

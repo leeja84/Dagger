@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 	}
 
 	@Override public void getWeather(WeatherResponse weatherResponse) {
+		if (weatherResponse == null || weatherResponse.getWeatherInfo() == null) {
+			return;
+		}
 		WeatherData firstWeatherData = weatherResponse.getWeatherInfo().get(0).getWeather().get(0);
 		WeatherMainData firstMainData = weatherResponse.getWeatherInfo().get(0).getMain();
 
@@ -70,8 +73,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 			+ " / Max : " + firstMainData.getTempMax()
 			+ " / Min : " + firstMainData.getTempMin()
 			+ " / Humidity : " + firstMainData.getHumidity() + "\n"
-			+ " / main : " + firstWeatherData.getMain()
-			+ " description : " + firstWeatherData.getDescription());
+			+ " Main : " + firstWeatherData.getMain()
+			+ " / Description : " + firstWeatherData.getDescription());
 	}
 
 	private View.OnClickListener clickListener = new View.OnClickListener() {

@@ -20,7 +20,6 @@ public class MainService {
     }
 
     public Subscription getWeatherInfo(String location, final WeatherCallback callback) {
-
         return weatherService.getWeatherInfo(location, UrlConstants.APP_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,14 +37,12 @@ public class MainService {
 
                     @Override
                     public void onError(Throwable e) {
-                        System.out.println("lee 1 ");
                         callback.onError(new NetworkError(e));
 
                     }
 
                     @Override
                     public void onNext(WeatherResponse weatherResponse) {
-                        System.out.println("lee 2");
                         callback.onSuccess(weatherResponse);
 
                     }
