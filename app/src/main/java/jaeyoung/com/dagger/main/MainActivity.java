@@ -3,16 +3,18 @@ package jaeyoung.com.dagger.main;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import jaeyoung.com.dagger.model.WeatherMainData;
-import jaeyoung.com.dagger.networking.MainService;
-import jaeyoung.com.dagger.model.WeatherData;
-import jaeyoung.com.dagger.model.WeatherResponse;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import jaeyoung.com.dagger.MyApplication;
 import jaeyoung.com.dagger.R;
+import jaeyoung.com.dagger.model.WeatherData;
+import jaeyoung.com.dagger.model.WeatherMainData;
+import jaeyoung.com.dagger.model.WeatherResponse;
+import jaeyoung.com.dagger.networking.MainService;
 
 import javax.inject.Inject;
 
@@ -24,10 +26,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
 	@Inject MainService mainService;
 
 	private MainPresenter mainPresenter;
-	private ProgressBar pbMain;
-	private TextView tvMain;
-	private AppCompatButton btnMain;
-	private TextInputEditText etMain;
+
+	@BindView(R.id.et_main) TextInputEditText etMain;
+	@BindView(R.id.pb_main) ProgressBar pbMain;
+	@BindView(R.id.tv_main) TextView tvMain;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 	}
 
 	private void initView() {
-		tvMain = findViewById(R.id.tv_main);
-		pbMain = findViewById(R.id.pb_main);
-		btnMain = findViewById(R.id.btn_main);
-		etMain = findViewById(R.id.et_main);
-		btnMain.setOnClickListener(clickListener);
+		ButterKnife.bind(this);
 	}
 
 	@Override public void showWait() {
@@ -77,10 +75,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
 			+ " / Description : " + firstWeatherData.getDescription());
 	}
 
-	private View.OnClickListener clickListener = new View.OnClickListener() {
-		public void onClick(View v) {
-			String location = etMain.getText().toString();
-			mainPresenter.getWeatherInfo(location);
-		}
-	};
+	@OnClick(R.id.btn_main) void search() {
+		String location = etMain.getText().toString();
+		mainPresenter.getWeatherInfo(location);
+	}
 }

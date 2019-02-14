@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 def dagger = "2.5"
 def support = "27.1.0"
+def butter_knife = "8.5.1"
 
 android {
     compileSdkVersion 27
@@ -34,6 +35,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:" + dagger
     implementation "com.google.dagger:dagger:" + dagger
 
+    implementation "com.jakewharton:butterknife:" + butter_knife
+    annotationProcessor "com.jakewharton:butterknife-compiler:" + butter_knife
 
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
